@@ -7,7 +7,6 @@ import cmd
 import models
 from models.amenity import Amenity
 from models.base_model import BaseModel
-from shlex import split
 from models.city import City
 from models.place import Place
 from models.review import Review
@@ -129,20 +128,23 @@ class HBNBCommand(cmd.Cmd):
             based or not on the class name.
         """
 
-        s = split(clsname)
-        aux = []
-        if len(s) == 0:
-            for values in models.storage.all().values():
-                aux.append(values.__str__())
-        elif len(s) == 1:
-            if s[0] not in classes:
-                print("** class doesn't exist **")
-                return
-            for key, values in models.storage.all().items():
-                temp = key.split('.')
-                if temp[0] == s[0]:
-                    aux.append(values.__str__())
-        print(aux)
+        newlist = []
+        allitem = storage.all()
+        xclsname = clsname.split()
+
+        if clsname and clsname not in classes:
+            print("** class doesn't exist **")
+
+        elif clsname in classes:
+            for key, value in allitem.items():
+                class_name = value.__class__.__name__
+                if class_name == xclsname[0]:
+                        newlist.append(value.__str__())
+        else:
+            for key, value in allitem.items():
+                newlist.append(str(key) + " " + str(value))
+        if newlist != []:
+            print(newlist)
 
     def do_update(self, clsname):
         """
