@@ -152,6 +152,8 @@ class HBNBCommand(cmd.Cmd):
         """
 
         argus = clsname.split()
+        objects = storage.all()
+        
 
         if not clsname:
             print("** class name missing **")
@@ -172,8 +174,35 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
 
         else:
-            setattr(storage.all()[argus[0]+"."+argus[1]],
-                    argus[2], argus[3])
+            name = argus[0] + '.' + argus[1]
+            instance = objects[name].__dict__
+            attribute = argus[2]
+            value = argus[3]
+            if value.isnumeric():
+                value = int(value)
+            elif "." in value:
+                split_value = value.split(".")
+                if (split_value[0].isnumeric() and
+                        split_value[1].isnumeric()):
+                    value = float(value)
+            elif type(value) == str:
+                value = value[1:-1]
+
+            if attribute in instance:
+                tipo = type(instance[attribute])
+                casted = tipo(value)
+                temp_dir = {attribute: casted}
+                setattr(objects[name], attribute, casted)
+                storage.save()
+            else:
+                tipo = type(value)
+                casted = tipo(value)
+                temp_dir = {attribute: casted}
+                setattr(objects[name], attribute, casted)
+                storage.save()
+           
+           # setattr(storage.all()[argus[0]+"."+argus[1]],
+           #         argus[2], argus[3])
 
 
 if __name__ == '__main__':
