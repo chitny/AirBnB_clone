@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 class Place(BaseModel):
     """
-        Creates a class named City that 
+        Creates a class named City that
         inherits from BaseModel
     """
 

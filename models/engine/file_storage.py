@@ -13,7 +13,7 @@ from models.user import User
 
 class FileStorage:
     """
-        This class serializes instances to a JSON file 
+        This class serializes instances to a JSON file
         and deserializes JSON file to instances
     """
 
@@ -29,7 +29,7 @@ class FileStorage:
 
     def new(self, obj):
         """
-            sets in __objects the obj with key <obj class name>.id  
+            sets in __objects the obj with key <obj class name>.id
         """
 
         key = obj.__class__.__name__ + "." + obj.id
@@ -48,7 +48,7 @@ class FileStorage:
 
     def reload(self):
         """
-            deserializes (load) the JSON file to __objects 
+            deserializes (load) the JSON file to __objects
         """
 
         classes = {'BaseModel': BaseModel, 'User': User, 'City': City,

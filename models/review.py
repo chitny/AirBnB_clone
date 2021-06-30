@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 class Review(BaseModel):
     """
-        Creates a class named Review that 
+        Creates a class named Review that
         inherits from BaseModel
     """
 

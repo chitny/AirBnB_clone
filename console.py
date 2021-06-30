@@ -20,7 +20,7 @@ classes = {'Amenity': Amenity, 'BaseModel': BaseModel, 'City': City,
 
 class HBNBCommand(cmd.Cmd):
     """
-        console.py that contains the entry point 
+        console.py that contains the entry point
         of the command interpreter
     """
 
@@ -50,8 +50,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, clsname):
         """
-            Creates a new instance of BaseModel, saves it 
-            (to the JSON file) and prints the id. 
+            Creates a new instance of BaseModel, saves it
+            (to the JSON file) and prints the id.
             use ex: create "ClassName"
         """
 
@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, clsnameid):
         """
-            Prints the string representation of an instance 
+            Prints the string representation of an instance
             based on the class name and id.
         """
 
@@ -161,39 +161,34 @@ class HBNBCommand(cmd.Cmd):
         """
 
         argus = clsname.split()
-        
 
         if not clsname:
             print("** class name missing **")
             return
-        
         elif argus[0] not in classes:
             print("** class doesn't exist **")
             return
-            
         elif len(argus) == 1:
             print("** instance id missing **")
             return
-            
         elif "{}.{}".format(argus[0], argus[1]) not in storage.all().keys():
             print("** no instance found **")
             return
-            
         elif len(argus) == 2:
             print("** attribute name missing **")
             return
-            
         elif len(argus) == 3:
             print("** value missing **")
             return
-            
         else:
             checkbd = "{}.{}".format(argus[0], argus[1])
             objects = storage.all()
             if checkbd in objects:
                 if argus[2] not in self.attributes:
-                    if argus[3][0] in self.specs and argus[3][-1] in self.specs:
-                        setattr(objects[checkbd], argus[2], str(argus[3][1: -1]))
+                    if argus[3][0] in self.specs and argus[3][-1]
+                    in self.specs:
+                        setattr(objects[checkbd], argus[2],
+                                str(argus[3][1: -1]))
                     else:
                         setattr(objects[checkbd], argus[2], str(argus[3]))
                     storage.save()
