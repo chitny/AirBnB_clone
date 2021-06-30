@@ -57,6 +57,7 @@ class HBNBCommand(cmd.Cmd):
 
         if len(clsname) == 0:
             print('** class name missing **')
+            return
 
         else:
 
@@ -78,12 +79,15 @@ class HBNBCommand(cmd.Cmd):
 
         if not argus:
             print('** class name missing **')
+            return
 
         elif argus[0] not in classes:
             print("** class doesn't exist **")
+            return
 
         elif len(argus) < 2:
             print("** instance id missing **")
+            return
 
         if len(argus) == 2:
 
@@ -91,9 +95,11 @@ class HBNBCommand(cmd.Cmd):
 
             if checkbd not in storage.all():
                 print("** no instance found **")
+                return
 
             else:
                 print(storage.all()[checkbd])
+                return
 
     def do_destroy(self, clsnameid):
         """
@@ -102,12 +108,15 @@ class HBNBCommand(cmd.Cmd):
 
         if not argus:
             print('** class name missing **')
+            return
 
         elif argus[0] not in classes:
             print("** class doesn't exist **")
+            return
 
         elif len(argus) < 2:
             print("** instance id missing **")
+            return
 
         if len(argus) == 2:
 
@@ -137,11 +146,13 @@ class HBNBCommand(cmd.Cmd):
         else:
             if not splitted[0] in classes:
                 print("** class doesn't exist **")
+                return
             else:
                 for key, value in objects.items():
                     class_name = value.__class__.__name__
                     if class_name == splitted[0]:
                         newlist.append(value.__str__())
+                    return
                 print(newlist)
 
     def do_update(self, clsname):
@@ -154,21 +165,27 @@ class HBNBCommand(cmd.Cmd):
 
         if not clsname:
             print("** class name missing **")
+            return
         
         elif argus[0] not in classes:
             print("** class doesn't exist **")
+            return
             
         elif len(argus) == 1:
             print("** instance id missing **")
+            return
             
         elif "{}.{}".format(argus[0], argus[1]) not in storage.all().keys():
             print("** no instance found **")
+            return
             
         elif len(argus) == 2:
             print("** attribute name missing **")
+            return
             
         elif len(argus) == 3:
             print("** value missing **")
+            return
             
         else:
             checkbd = "{}.{}".format(argus[0], argus[1])
