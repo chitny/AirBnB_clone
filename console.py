@@ -4,6 +4,7 @@
 """
 
 import cmd
+import models
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -129,6 +130,7 @@ class HBNBCommand(cmd.Cmd):
 
         newlist = []
         new_item = storage.all()
+
         if clsname and clsname not in classes:
             print("** class doesn't exist **")
 
@@ -136,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in new_item.items():
                 split_key = key.split(".")
                 new_key = "[" + split_key[0] + "] (" + split_key[1] + ")"
-                newlist.append(new_key + " " + str(value))
+                newlist.append(str(value))
         else:
             for key, value in new_item.items():
                 newlist.append(str(key) + " " + str(value))
