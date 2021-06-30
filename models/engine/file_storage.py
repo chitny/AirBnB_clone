@@ -10,9 +10,6 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
-classes = {'BaseModel': BaseModel, 'User': User, 'City': City,
-           'State': State, 'Amenity': Amenity, 'Place': Place,
-           'Review': Review}
 
 class FileStorage:
     """
@@ -54,10 +51,17 @@ class FileStorage:
             deserializes (load) the JSON file to __objects
         """
 
-        with open(self.__file_path, "r") as file:
-            newdict = json.load(file)
+        classes = {'BaseModel': BaseModel, 'User': User, 'City': City,
+                   'State': State, 'Amenity': Amenity, 'Place': Place,
+                   'Review': Review}
 
-        for keys, values in newdict.items():
-            spl = keys.split('.')
-            new = classes[spl[0]](**values)
-            self.new(new)
+        try:
+            with open(self.__file_path, "r") as file:
+                newdict = json.load(file)
+
+            for keys, values in newdict.items():
+                spl = keys.split('.')
+                new = classes[spl[0]](**values)
+                self.new(new)
+        except:
+            pass
