@@ -128,24 +128,19 @@ class HBNBCommand(cmd.Cmd):
         """
 
         newlist = []
-        splitted = clsname.split()
-        objects = storage.all()
-
-        if len(clsname) == 0:
-            for key, value in objects.items():
-                newlist.append(value.__str__())
-            print(newlist)
+        new_item = storage.all()
+        if clsname and clsname not in classes:
+            print("** class doesn't exist **")
+            
+        elif clsname in classes:
+            for key, value in new_item.items():
+                split_key = key.split(".")
+                new_key = "[" + split_key[0] + "] (" + split_key[1] + ")"
+                newlist.append(new_key + " " + str(value))
         else:
-            if not splitted[0] in classes:
-                print("** class doesn't exist **")
-                return
-            else:
-                for key, value in objects.items():
-                    class_name = value.__class__.__name__
-                    if class_name == splitted[0]:
-                        newlist.append(value.__str__())
-                    return
-                print(newlist)
+            for key, value in new_item.items():
+                newlist.append(str(key) + " " + str(value))
+        print(newlist)
 
     def do_update(self, clsname):
         """
@@ -168,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
 
         elif len(argus) == 2:
             print("** attribute name missing **")
-
+        
         elif len(argus) == 3:
             print("** value missing **")
 
