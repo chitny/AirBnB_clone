@@ -10,6 +10,9 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+classes = {'BaseModel': BaseModel, 'User': User, 'City': City,
+           'State': State, 'Amenity': Amenity, 'Place': Place,
+           'Review': Review}
 
 class FileStorage:
     """
@@ -32,7 +35,7 @@ class FileStorage:
             sets in __objects the obj with key <obj class name>.id
         """
 
-        key = str(obj.__class__.__name__) + "." + str(obj.id)
+        key = obj.__class__.__name__ + "." + obj.id
         self.__objects.update({key: obj})
 
     def save(self):
@@ -51,17 +54,10 @@ class FileStorage:
             deserializes (load) the JSON file to __objects
         """
 
-        classes = {'BaseModel': BaseModel, 'User': User, 'City': City,
-                   'State': State, 'Amenity': Amenity, 'Place': Place,
-                   'Review': Review}
+        with open(self.__file_path, "r") as file:
+            newdict = json.load(file)
 
-        try:
-            with open(self.__file_path, "r") as file:
-                newdict = json.load(file)
-
-            for keys, values in newdict.items():
-                spl = keys.split('.')
-                new = classes[spl[0]](**values)
-                self.new(new)
-        except:
-            pass
+        for keys, values in newdict.items():
+            spl = keys.split('.')
+            new = classes[spl[0]](**values)
+            self.new(new)
