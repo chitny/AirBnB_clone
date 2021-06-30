@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 class Place(BaseModel):
     """
-        Creates a class named City that
+        Creates a class named Place that
         inherits from BaseModel
     """
 
@@ -20,4 +20,4 @@ class Place(BaseModel):
     price_by_night = 0
     latitude = 0.0
     longitude = 0.0
-    amenity_ids = ""
+    amenity_ids = []
