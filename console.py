@@ -185,8 +185,7 @@ class HBNBCommand(cmd.Cmd):
             objects = storage.all()
             if checkbd in objects:
                 if argus[2] not in self.attributes:
-                    if argus[3][0] in self.specs and argus[3][-1]
-                    in self.specs:
+                    if argus[3][0]in self.specs and argus[3][-1] in self.specs:
                         setattr(objects[checkbd], argus[2],
                                 str(argus[3][1: -1]))
                     else:
