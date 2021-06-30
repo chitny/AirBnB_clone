@@ -5,7 +5,6 @@ from models.base_model import BaseModel
 from models.user import User
 
 
-
 class Test_user(unittest.TestCase):
     """Tests the user module"""
 
