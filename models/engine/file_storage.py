@@ -2,7 +2,13 @@
 """Storage class"""
 
 import json
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class FileStorage:
@@ -45,9 +51,17 @@ class FileStorage:
             deserializes (load) the JSON file to __objects 
         """
 
+        classes = {'BaseModel': BaseModel, 'User': User, 'City': City,
+                   'State': State, 'Amenity': Amenity, 'Place': Place,
+                   'Review': Review}
+
         try:
             with open(self.__file_path, "r") as file:
                 newdict = json.load(file)
-                __objects += newdict
+
+            for keys, values in newdict.items():
+                spl = keys.split('.')
+                new = classes[spl[0]](**values)
+                self.new(new)
         except:
             pass

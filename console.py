@@ -4,6 +4,7 @@
 """
 
 import cmd
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -18,14 +19,14 @@ class HBNBCommand(cmd.Cmd):
         """
             quit: command to exit the program
         """
-        
+
         return True
 
     def do_EOF(self, line):
         """
-            function to handle EOF
+            function to handle EOF (exit the program)
         """
-       
+
         print()
         return True
 
@@ -33,8 +34,9 @@ class HBNBCommand(cmd.Cmd):
         """
             function to handle enter when empty line
         """
-       
+
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
