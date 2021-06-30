@@ -51,26 +51,26 @@ class TestUserFsInstances(unittest.TestCase):
         u_id = self.user.id
         all_obj = storage.all()
         actual = 0
-        for k in all_obj.keys():
-            if u_id in k:
+        for keys in all_obj.keys():
+            if u_id in keys:
                 actual = 1
         self.assertTrue(1 == actual)
 
     def test_obj_saved_to_file(self):
-        """... checks proper FileStorage instantiation"""
+        """checks proper FileStorage instantiation"""
         os.remove(file)
         self.user.save()
         u_id = self.user.id
         actual = 0
         with open(file, mode='r', encoding='utf-8') as f_obj:
             storage_dict = json.load(f_obj)
-        for k in storage_dict.keys():
-            if u_id in k:
+        for keys in storage_dict.keys():
+            if u_id in keys:
                 actual = 1
         self.assertTrue(1 == actual)
 
     def test_reload(self):
-        """... checks proper usage of reload function"""
+        """checks proper usage of reload function"""
         os.remove(file)
         self.bm_obj.save()
         u_id = self.bm_obj.id
@@ -78,8 +78,8 @@ class TestUserFsInstances(unittest.TestCase):
         new_storage = FileStorage()
         new_storage.reload()
         all_obj = new_storage.all()
-        for k in all_obj.keys():
-            if u_id in k:
+        for keys in all_obj.keys():
+            if u_id in keys:
                 actual = 1
         self.assertTrue(1 == actual)
 
