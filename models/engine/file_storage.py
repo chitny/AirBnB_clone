@@ -19,15 +19,15 @@ class FileStorage:
             returns the dictionary __objects
         """
 
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """
             sets in __objects the obj with key <obj class name>.id  
         """
 
-        key = obj.__class__.__name__+"."+obj.id
-        FileStorage.__objects[key] = obj
+        key = obj.__class__.__name__ + "." + obj.id
+        self.__objects.update({key: obj})
 
     def save(self):
         """
@@ -36,7 +36,7 @@ class FileStorage:
 
         dicts = {}
         for key in self.__objects:
-            dicts = self.__objects[key].to_dict()
+            dicts[key] = self.__objects[key].to_dict()
         with open(self.__file_path, "w") as file:
             json.dump(dicts, file)
 
@@ -44,8 +44,10 @@ class FileStorage:
         """
             deserializes (load) the JSON file to __objects 
         """
+
         try:
             with open(self.__file_path, "r") as file:
-                dict = json.load(file)
+                newdict = json.load(file)
+                __objects += newdict
         except:
             pass
