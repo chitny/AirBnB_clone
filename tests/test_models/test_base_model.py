@@ -10,6 +10,23 @@ import json
 BaseModel = models.base_model.BaseModel
 
 
+class TestBaseModelDocs(unittest.TestCase):
+    """Class for testing BaseModel docs"""
+
+    def test_doc_file(self):
+        """... documentation for the file"""
+        expected = '\nBaseModel class\n'
+        actual = models.base_model.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_class(self):
+        """... documentation for the class"""
+        expected = "BaseModel defines all common attributes/" \
+                   "methods for other classes"
+        actual = BaseModel.__doc__
+        self.assertEqual(expected, actual)
+
+
 class TestBaseModelInstances(unittest.TestCase):
     """testing for class instances"""
 
