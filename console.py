@@ -140,7 +140,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             for key, value in new_item.items():
                 newlist.append(str(key) + " " + str(value))
-        print(newlist)
+        if newlist != []:
+            print(newlist)
 
     def do_update(self, clsname):
         """
@@ -168,8 +169,8 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
 
         else:
-            setattr(storage.all()[args[0]+"."+args[1]],
-                    args[2], args[3])
+            setattr(storage.all()[argus[0]+"."+argus[1]],
+                    argus[2], argus[3])
 
 
 if __name__ == '__main__':
