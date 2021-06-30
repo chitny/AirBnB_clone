@@ -57,14 +57,12 @@ class HBNBCommand(cmd.Cmd):
 
         if not clsname:
             print('** class name missing **')
-            return
         elif clsname not in classes:
             print("** class doesn't exist **")
         else:
             new_instance = classes[clsname]()
             print(new_instance.id)
             new_instance.save()
-                
 
     def do_show(self, clsnameid):
         """
@@ -74,17 +72,14 @@ class HBNBCommand(cmd.Cmd):
 
         argus = clsnameid.split()
 
-        if not argus:
+        if not clsnameid:
             print('** class name missing **')
-            return
 
         elif argus[0] not in classes:
             print("** class doesn't exist **")
-            return
 
-        elif len(argus) < 2:
+        elif len(argus) == 1:
             print("** instance id missing **")
-            return
 
         if len(argus) == 2:
 
@@ -92,16 +87,16 @@ class HBNBCommand(cmd.Cmd):
 
             if checkbd not in storage.all():
                 print("** no instance found **")
-                return
 
             else:
                 print(storage.all()[checkbd])
-                return
 
     def do_destroy(self, clsnameid):
         """
             function to handle enter when empty line
         """
+
+        argus = clsnameid.split()
 
         if not argus:
             print('** class name missing **')
@@ -180,9 +175,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             checkbd = "{}.{}".format(argus[0], argus[1])
             objects = storage.all()
+            nopep8 = self.specs
             if checkbd in objects:
                 if argus[2] not in self.attributes:
-                    if argus[3][0]in self.specs and argus[3][-1] in self.specs:
+                    if argus[3][0] in nopep8 and argus[3][-1] in nopep8:
                         setattr(objects[checkbd], argus[2],
                                 str(argus[3][1: -1]))
                     else:
