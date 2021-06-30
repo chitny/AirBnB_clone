@@ -12,10 +12,7 @@ from models.user import User
 
 
 class FileStorage:
-    """
-        This class serializes instances to a JSON file
-        and deserializes JSON file to instances
-    """
+    """Serializes instances and deserializes JSON file"""
 
     __file_path = "file.json"
     __objects = {}
