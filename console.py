@@ -194,23 +194,11 @@ class HBNBCommand(cmd.Cmd):
         print(" ▲ ")
         print("▲ ▲")
 
-    def preloop(self):
+    def default(self, line):
         """
-            This is my intro to the console
+            Displays when the console doesn't find your command
         """
-        print('.-----------------------------------------------------.')
-        print('|   Welcome to my hbnb console - triforce edition!    |')
-        print('|   if you need help, just type \'help\' and enter      |')
-        print('|   if you need to exit,  \'quit\' and enter            |')
-        print('.-----------------------------------------------------.')
-
-    def postloop(self):
-        """
-        This is the last you see when you quit
-        """
-        print('.-----------------------------------------.')
-        print('|   Well, thats it! Time to play Zelda!   |')
-        print('.-----------------------------------------.')
+        print("This command: \"{}\" is invalid, try again".format(line))
 
 
 if __name__ == '__main__':
