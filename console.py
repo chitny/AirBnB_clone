@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
         new_item = storage.all()
         if clsname and clsname not in classes:
             print("** class doesn't exist **")
-            
+
         elif clsname in classes:
             for key, value in new_item.items():
                 split_key = key.split(".")
@@ -164,7 +164,7 @@ class HBNBCommand(cmd.Cmd):
 
         elif len(argus) == 2:
             print("** attribute name missing **")
-        
+
         elif len(argus) == 3:
             print("** value missing **")
 
