@@ -179,10 +179,11 @@ class HBNBCommand(cmd.Cmd):
         """
             Counts the number of the objects in File Storage
         """
+        argus = clsname.split()
         allitem = storage.all()
         counter = 0
         for key in allitem.keys():
-            if clsname in key:
+            if argus[0] in key:
                 counter += 1
         print(counter)
 
