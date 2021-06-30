@@ -32,7 +32,7 @@ class FileStorage:
             sets in __objects the obj with key <obj class name>.id
         """
 
-        key = obj.__class__.__name__ + "." + obj.id
+        key = str(obj.__class__.__name__) + "." + str(obj.id)
         self.__objects.update({key: obj})
 
     def save(self):
