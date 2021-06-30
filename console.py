@@ -29,14 +29,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         """
-            quit: command to exit the program
+            Quit: command to exit the program
         """
 
         return True
 
     def do_EOF(self, line):
         """
-            function to handle EOF (exit the program)
+            Function to handle EOF (exit the program)
         """
 
         print()
@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """
-            function to handle enter when empty line
+            Function to handle enter when empty line
         """
 
         pass
@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, clsnameid):
         """
-            function to handle enter when empty line
+            Function to handle enter when empty line
         """
 
         argus = clsnameid.split()
@@ -139,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in allitem.items():
                 class_name = value.__class__.__name__
                 if class_name == xclsname[0]:
-                        newlist.append(value.__str__())
+                    newlist.append(value.__str__())
         else:
             for key, value in allitem.items():
                 newlist.append(str(key) + " " + str(value))
@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, clsname):
         """
-            function to handle enter when empty line
+            Function to handle enter when empty line
         """
 
         argus = clsname.split()
@@ -174,6 +174,48 @@ class HBNBCommand(cmd.Cmd):
         else:
             setattr(storage.all()[argus[0]+"."+argus[1]],
                     argus[2], argus[3])
+
+    def do_count(self, clsname):
+        """
+            Counts the number of the objects in File Storage
+        """
+        allitem = storage.all()
+        counter = 0
+        for key in allitem.keys():
+            if clsname in key:
+                counter += 1
+        print(counter)
+
+    def do_triforce(self, line):
+        """
+            A Link to the Past was the best!
+        """
+        print(" ▲ ")
+        print("▲ ▲")
+
+    def preloop(self):
+        """
+            This is my intro to the console
+        """
+        print('.-----------------------------------------------------.')
+        print('|   Welcome to my hbnb console - triforce edition!    |')
+        print('|   if you need help, just type \'help\' and enter      |')
+        print('|   if you need to exit,  \'quit\' and enter            |')
+        print('.-----------------------------------------------------.')
+
+    def postloop(self):
+        """
+        This is the last you see when you quit
+        """
+        print('.-----------------------------------------.')
+        print('|   Well, thats it! Time to play Zelda!   |')
+        print('.-----------------------------------------.')
+
+    def default(self, line):
+        """
+            Displays when the console doesn't find your command
+        """
+        print("This command: \"{}\" is invalid, try again".format(line))
 
 
 if __name__ == '__main__':
