@@ -55,19 +55,16 @@ class HBNBCommand(cmd.Cmd):
             use ex: create "ClassName"
         """
 
-        if len(clsname) == 0:
+        if not clsname:
             print('** class name missing **')
             return
-
+        elif clsname not in classes:
+            print("** class doesn't exist **")
         else:
-
-            try:
-                new_instance = classes[clsname]()
-                print(new_instance.id)
-                new_instance.save()
-
-            except:
-                print("** class doesn't exist **")
+            new_instance = classes[clsname]()
+            print(new_instance.id)
+            new_instance.save()
+                
 
     def do_show(self, clsnameid):
         """
