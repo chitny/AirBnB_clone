@@ -156,37 +156,25 @@ class HBNBCommand(cmd.Cmd):
 
         if not clsname:
             print("** class name missing **")
-            return
+
         elif argus[0] not in classes:
             print("** class doesn't exist **")
-            return
+
         elif len(argus) == 1:
             print("** instance id missing **")
-            return
+
         elif "{}.{}".format(argus[0], argus[1]) not in storage.all().keys():
             print("** no instance found **")
-            return
+
         elif len(argus) == 2:
             print("** attribute name missing **")
-            return
+
         elif len(argus) == 3:
             print("** value missing **")
-            return
+
         else:
-            checkbd = "{}.{}".format(argus[0], argus[1])
-            objects = storage.all()
-            nopep8 = self.specs
-            if checkbd in objects:
-                if argus[2] not in self.attributes:
-                    if argus[3][0] in nopep8 and argus[3][-1] in nopep8:
-                        setattr(objects[checkbd], argus[2],
-                                str(argus[3][1: -1]))
-                    else:
-                        setattr(objects[checkbd], argus[2], str(argus[3]))
-                    storage.save()
-            else:
-                print("** no instance found **")
-                return
+            setattr(storage.all()[args[0]+"."+args[1]],
+                    args[2], args[3])
 
 
 if __name__ == '__main__':
