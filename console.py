@@ -177,7 +177,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, clsname):
         """
-            Counts the number of the objects in File Storage
+        Counts the number of the objects in File Storage
         """
         argus = clsname.split()
         allitem = storage.all()
@@ -211,12 +211,6 @@ class HBNBCommand(cmd.Cmd):
         print('.-----------------------------------------.')
         print('|   Well, thats it! Time to play Zelda!   |')
         print('.-----------------------------------------.')
-
-    def default(self, line):
-        """
-            Displays when the console doesn't find your command
-        """
-        print("This command: \"{}\" is invalid, try again".format(line))
 
 
 if __name__ == '__main__':
