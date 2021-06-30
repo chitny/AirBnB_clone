@@ -46,7 +46,7 @@ class BaseModel:
     def to_dict(self):
         """
             returns a dictionary containing all keys/values of __dict__
-            of the instance plus class name, created ad and update at
+            of the instance plus class name, created at and update at
             attrs
         """
 

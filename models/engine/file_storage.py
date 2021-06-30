@@ -61,7 +61,7 @@ class FileStorage:
 
             for keys, values in newdict.items():
                 spl = keys.split('.')
-                new = classes[spl[0]](**values)
-                self.new(new)
+                obj = classes[spl[0]](**values)
+                self.new(obj)
         except:
             pass
