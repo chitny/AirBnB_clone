@@ -3,7 +3,7 @@
 
 from datetime import datetime
 from uuid import uuid4
-
+import models
 
 class BaseModel:
     """BaseModel defines all common attributes/methods for other classes"""
@@ -23,6 +23,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -38,6 +39,7 @@ class BaseModel:
         """
 
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
