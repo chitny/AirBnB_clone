@@ -19,6 +19,19 @@ classes = {'Amenity': Amenity, 'BaseModel': BaseModel, 'City': City,
            'User': User}
 
 
+def validator(id):
+    ''' 
+        takes id and checks for it in __objects
+    '''
+    newlist = []
+    for key in models.storage.all():
+        aux = key.split('.')
+        newlist.append(aux[1])
+    if id in newlist:
+        return True
+    return False
+
+
 class HBNBCommand(cmd.Cmd):
     """
         console.py that contains the entry point
@@ -198,7 +211,73 @@ class HBNBCommand(cmd.Cmd):
         """
             Displays when the console doesn't find your command
         """
-        print("This command: \"{}\" is invalid, try again".format(line))
+        argus = line.split('.')
+        if argus[0] not in classes or len(argus) != 2:
+            print("This command doesn't exist: {}". format(argus[0]))
+            return
+
+        if argus[1] == 'all()':
+            newlist = []
+            for key, values in models.storage.all().items():
+                cls = key.split('.')
+                if cls[0] == argus[0]:
+                    newlist.append(values.__str__())
+            print(newlist)
+            return
+
+        if argus[1] == 'count()':
+            count = 0
+            for key in models.storage.all():
+                cls = key.split('.')
+                if cls[0] == argus[0]:
+                    count += 1
+            print(count)
+            return
+
+        if argus[1][0:5] == "show(" and argus[1][-1] == ')':
+            subid = argus[1].split('(')
+            id = subid[1][:-2]
+            id = id[1:]
+            if validator(id):
+                obj_key = argus[0] + '.' + id
+                if obj_key in models.storage.all():
+                    print(models.storage.all()[obj_key])
+                else:
+                    print("** no instance found **")
+            else:
+                print("** no instance found **")
+            return
+
+        if argus[1][0:8] == "destroy(" and argus[1][-1] == ')':
+            subid = argus[1].split('(')
+            id = subid[1][:-2]
+            id = id[1:]
+            if validator(id):
+                key = argus[0] + '.' + id
+                if key in models.storage.all():
+                    models.storage.all().pop(key)
+                    models.storage.save()
+                else:
+                    print("** no instance found **")
+            else:
+                print("** no instance found **")
+            return
+
+        if argus[1][0:7] == 'update(' and argus[1][-1] == ')':
+            if argus[1][-2] == '}':
+                subargus = argus[1].split('"', 2)
+                dic = eval(subargus[2][2:-1])
+                for key, values in dic.items():
+                    parse = argus[0] + " " + subargus[1] + \
+                        " " + key + " " + str(values)
+                    self.do_update(parse)
+                return
+            else:
+                subargus = argus[1].split('"')
+                clsname = argus[0] + " " + subargus[1] + " " + \
+                    str(subargus[3]) + " " + str(subargus[5])
+                self.do_update(clsname)
+                return
 
 
 if __name__ == '__main__':
