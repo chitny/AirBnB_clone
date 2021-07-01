@@ -20,7 +20,7 @@ classes = {'Amenity': Amenity, 'BaseModel': BaseModel, 'City': City,
 
 
 def validator(id):
-    ''' 
+    '''
         takes id and checks for it in __objects
     '''
     newlist = []
