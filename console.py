@@ -75,13 +75,13 @@ class HBNBCommand(cmd.Cmd):
 
         if not clsnameid:
             print('** class name missing **')
-
+            return
         elif argus[0] not in classes:
             print("** class doesn't exist **")
-
+            return
         elif len(argus) == 1:
             print("** instance id missing **")
-
+            return
         if len(argus) == 2:
 
             checkbd = "{}.{}".format(argus[0], argus[1])
