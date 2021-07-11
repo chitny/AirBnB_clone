@@ -1,0 +1,23 @@
+header {
+    background: #fff;
+    height: 70px;
+    width: 100%;
+    border-bottom:  1px solid #CCC;
+    align-items: center;
+    display: flex;   
+}
+
+.logo {
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    margin-left: 20px;
+    height: 60px;
+    width: 140px;
+}
+
+@media screen and (max-width: 720px) {
+    .logo {
+        margin-left: auto;
+        margin-right: auto;      
+    }
+}
